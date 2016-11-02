@@ -601,7 +601,9 @@ void MidiInCore :: openPort( unsigned int portNumber, const std::string portName
     return;
   }
 
+#if !defined(__MACOSX_NO_RUN_CFRUNLOOP__)
   CFRunLoopRunInMode( kCFRunLoopDefaultMode, 0, false );
+#endif
   unsigned int nSrc = MIDIGetNumberOfSources();
   if (nSrc < 1) {
     errorString_ = "MidiInCore::openPort: no MIDI input sources found!";
@@ -691,7 +693,9 @@ void MidiInCore :: closePort( void )
 
 unsigned int MidiInCore :: getPortCount()
 {
+#if !defined(__MACOSX_NO_RUN_CFRUNLOOP__)
   CFRunLoopRunInMode( kCFRunLoopDefaultMode, 0, false );
+#endif
   return MIDIGetNumberOfSources();
 }
 
@@ -828,7 +832,9 @@ std::string MidiInCore :: getPortName( unsigned int portNumber )
   char name[128];
 
   std::string stringName;
+#if !defined(__MACOSX_NO_RUN_CFRUNLOOP__)
   CFRunLoopRunInMode( kCFRunLoopDefaultMode, 0, false );
+#endif
   if ( portNumber >= MIDIGetNumberOfSources() ) {
     std::ostringstream ost;
     ost << "MidiInCore::getPortName: the 'portNumber' argument (" << portNumber << ") is invalid.";
@@ -891,7 +897,9 @@ void MidiOutCore :: initialize( const std::string& clientName )
 
 unsigned int MidiOutCore :: getPortCount()
 {
+#if !defined(__MACOSX_NO_RUN_CFRUNLOOP__)
   CFRunLoopRunInMode( kCFRunLoopDefaultMode, 0, false );
+#endif
   return MIDIGetNumberOfDestinations();
 }
 
@@ -902,7 +910,9 @@ std::string MidiOutCore :: getPortName( unsigned int portNumber )
   char name[128];
 
   std::string stringName;
+#if !defined(__MACOSX_NO_RUN_CFRUNLOOP__)
   CFRunLoopRunInMode( kCFRunLoopDefaultMode, 0, false );
+#endif
   if ( portNumber >= MIDIGetNumberOfDestinations() ) {
     std::ostringstream ost;
     ost << "MidiOutCore::getPortName: the 'portNumber' argument (" << portNumber << ") is invalid.";
@@ -927,7 +937,9 @@ void MidiOutCore :: openPort( unsigned int portNumber, const std::string portNam
     return;
   }
 
+#if !defined(__MACOSX_NO_RUN_CFRUNLOOP__)
   CFRunLoopRunInMode( kCFRunLoopDefaultMode, 0, false );
+#endif
   unsigned int nDest = MIDIGetNumberOfDestinations();
   if (nDest < 1) {
     errorString_ = "MidiOutCore::openPort: no MIDI output destinations found!";
